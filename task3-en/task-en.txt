@@ -1,0 +1,154 @@
+                          ━━━━━━━━━━━━━━━━━━━
+                                Viruses
+                          ━━━━━━━━━━━━━━━━━━━
+
+
+Task
+══════════
+Virus data is available in three databases:
+
+    SimpleDatabase - a database that stores data in a list
+
+    ExcellDatabase - a database that stores data in strings
+    separated by a semicolon ';'
+
+    OvercomplicatedDatabase - a database that stores data in a tree data structure
+
+    SimpleGenomeDatabase - a database that stores data about genotypes,
+    which complement the virus data. When reading from ExcellDatabase and SimpleDatabase
+    find the corresponding genotype by Id (it will be unique).
+    In the case of OvercomplicatedDatabase, search for the genotype by the tag (there may
+    be multiple genotypes sharing a tag).
+  
+1. Prepare classes/methods that will allow you to iterate over the database data
+  independently of the selected database (SimpleDatabase / ExcellDatabase / OvercomplicatedDatabase)
+  in such a way that when passing data to the MediaOutlet class (Publish method),
+  Publish method can print full data without knowing about the database used
+  and without using SimpleGenomeDatabase. The solution should allow for easy adding
+  databases (including SimpleGenomeDatabase)
+
+  When reading the database, the VirusData and GenomeData classes should be used.
+
+  Present output by using the MediaOutlet class and the Publish method for each of the databases.
+
+  Not allowed:
+    - changing the code of databases, GenomeData and VirusData
+
+
+2. Prepare classes/methods to:
+    - filter data using Func<VirusData, bool> 
+    - mapping data with Func<VirusData, VirusData>
+    - and the concatenation two databases. 
+  Classes must be implemented in such a way that you will not need to change your MediaOutlet
+  implementation from the first subsection. Operations should be independent of the database used.
+  It should be possible to stack operations one after another, for example, to assemble one after another:
+    - filtering out viruses with DeathRate > 3.0,
+    - mapping viruses incrementing DeathRate by 1,
+    - filtering out viruses with DeathRate <1.0
+  The classes and methods from the 1st subsection should be used.
+
+  Present
+    - Filtering DeathRate > 15 of data from the ExcellDatabase database
+    - mapping f => new VirusData(f.VirusName, f.DeathRate + 10, f.InfectionRate, f.Genomes)
+      and the filter f => f.DeathRate > 15 simultaneously of data from the ExcellDatabase database
+    - concatenation of data from the ExcellDatabase database and data from the OvercomplicatedDatabase database
+  
+  Not allowed:
+    - changing the classes implemented in the first subsection
+    - implementing operations inside MediaOutlet (the call of Publish methond shouldn't be
+      differ to one made in the first point).
+    - implement separate classes/functions for different databases.
+    - read the entire database and then saving it in some data structure (for example a list),
+      for example, and then filter / map
+
+            Examples for ExcellDatabase:
+              - plain output
+                    measles, death rate: 20, infection rate: 90
+                      Genome: ad27bae7-6c53-490b-be32-b924282d7927 ACAC, 16.31512763738405
+                    sars, death rate: 12.321, infection rate: 72.321
+                        Genome: f00c68dd-9544-43e3-9d01-f410409a77bf ACTAG, 54.637822999915954
+                    rubella, death rate: 33.33, infection rate: 1.33
+                        Genome: 3e28f89b-eb0c-4a7e-a291-02394571f526 ACTAG, 10.098471543797512
+                    chickenpox, death rate: 0, infection rate: 100
+                        Genome: 4038abbf-aeb3-4450-9c65-e92e71144d37 ACTAG, 3.4102672261233757
+                    smallpox, death rate: 5, infection rate: 10
+                        Genome: e60ea218-0c25-473f-8956-f3a9d0ef11a3 GACAT, 86.92418252440363
+                    chikungunya, death rate: 1, infection rate: 0
+                        Genome: 902958fa-1a62-4b1a-a71d-ade9ec00f33e ACTAGA, 0.9061809633421622
+
+              - filtering f => f.DeathRate > 15
+                    measles, death rate: 20, infection rate: 90
+                        Genome: f60bac44-1039-4ba5-8241-80c1c756f8b7 ACAC, 16.31512763738405
+                    rubella, death rate: 33.33, infection rate: 1.33
+                        Genome: b7f52670-a991-4a22-9032-7ef13c987ac2 ACTAG, 10.098471543797512
+
+              - mapping f => new VirusData(f.VirusName, f.DeathRate+10, f.InfectionRate, f.Genomes)
+                and filtering f => f.DeathRate > 15 jednocześnie
+
+                    measles, death rate: 30, infection rate: 90
+                        Genome: e8ecf68b-ba7e-4a8b-a1ce-8d808b8d5e08 ACAC, 16.31512763738405
+                    sars, death rate: 22.320999999999998, infection rate: 72.321
+                        Genome: 8ce9a3f6-b410-49df-a3b5-4061954497a6 ACTAG, 54.637822999915954
+                    rubella, death rate: 43.33, infection rate: 1.33
+                        Genome: 50a96b03-d9d3-438b-8a24-ed153f12eb32 ACTAG, 10.098471543797512
+
+###################################
+
+The next task will be about preparing a process of testing new vaccines.
+There are 3 vaccines: AvadaVaccine, ReverseVaccine, Vaccinator3000.
+There are 3 subjects: dogs, cats, pigs.
+
+We want to check how much subjects will stay alive after viruses (from SimpleDatabase) attack after vaccination process.
+
+Every vaccine offers basic immunity to nucleotides chains, however its interaction with subjects vary.
+
+If the immunity chain includes the virus chain, then the subject is immune to the virus and survives its attack. Otherwise, it dies.
+For example, if an object has immunity to "ACTAG", then it will survive an attack from the "CTAG" virus, but it will not survive an attack from the "ACTG" virus.
+
+Unfortunately, vaccination also comes with the possibility of death of the test subject - each vaccine has a DeathRate.
+
+The following describes how the vaccines work:
+(for convenience, an object can only be vaccinated with one vaccine at a time, the base object has an empty base immunity)
+
+- AvadaVaccine:
+	- dog: assigns basic immunity, there is no possibility to kill the dog
+	- cat: dies with probability DeathRate, assigns basic immunity but omits the first 3 nucleotides
+	- pig: kills the pig
+
+- ReverseVaccine:
+	That vaccine becomes less suitable for usage with time. Each time it is passed, the actual chances for the object to die increase by DeathRate. 
+	For example, first time you pass it the chances are 0, then DeathRate, then 2*DeathRate etc.
+	
+	- dog: assigns its base immunity to the dog but reversed, never kills it
+	- cat: kills the cat
+	- pig: assigns the pig the vaccine's base immunity concatenated with its inverse. For example: "CTG" -> "CTG" + "GTC" = "CTGGTC"
+		The pig dies according to the current chance of death.
+
+- Vaccinator3000:
+	This vaccine works by randomly selecting individual elements of base immunity and concatenating the sampled elements.
+	- dog: the process of selecting is done 3000 times, the dog dies with a DeathRate
+	- cat: the process of selecting is done 300 times, the cat dies with a chance of DeathRate
+	- pig: the process of selecting is done 15 times, the pig dies with a chance of 3*DeathRate
+
+3. Complete the implementation of the test object and vaccine classes as instructed above.
+
+The solution should allow for easy addition of new vaccine types.
+Adding a new vaccine type should not require modification of existing classes.
+Adding a new test object type may involve modifying existing classes.
+
+Add check prints when a test object dies during vaccination.
+
+4. Complete the Test() function of the Tester class as described in the code.
+When testing test objects with viruses, use the solution from step 1.
+
+##############################
+What is allowed
+
+- Add new fields and methods to already existing classes/interfaces;
+- Add new classes (although this may not necessarily be useful).
+
+##############################
+What you must not do
+
+- Change the access modifiers (public, protected, private) of already created fields/properties/methods;
+- Use explicit type checking with if, switch etc.

@@ -1,0 +1,70 @@
+Multiplatform
+
+During development for different platforms, we try to share as much as possible of code
+between them and isolate parts dependent on the system. Your task is to create a way to build
+interface which is independent of the platform (interface should not have to know, what platform
+is underneath).
+
+Package contains:
+- Program.cs file, which You should modify,
+- definitions of ITextBos, IButton and IGrid interfaces which You cannot change.
+
+
+Main assumptions:
+1. Only one platfrom is being in use at once.
+2. You cannot modify interfaces provided.
+3. User's program (imitated by Your function, details below) should be unaware of chosen platform.
+However, it should allow creation of elements which interfaces were provided.
+4. Creating new platform should not affect user's program in any way.
+
+Your task:
+1. Implementation of interfaces for three different platforms according to descriptions below.
+2. Implementation of function imitating user's program according to descriptions below.
+3. Creating Main function which is going to test Your solution. It should run user's program
+with each of available platform.
+
+Constructor of each of the object should print the text: $"{PlatformName}{ObjectName} created"
+
+iOS:
+- IButton:
+	- property Content saves the text,
+	- DrawContent prints it out,
+	- ButtonPressed prints $"IOS Button pressed, content - {content}".
+- ITextBox:
+	- property Content saves the text,
+	- DrawContent prints it out.
+- IGrid:
+	- GetButtons i GetTextBoxes - return Buttons and TextBoxes accordingly to the name in order of addition.
+
+Windows:
+- IButton:
+	- property Content saves the capitalized text,
+	- DrawContent prints it out,
+	- ButtonPressed prints "Windows button pressed".
+- ITextBox:
+	- property Content saves the second half the text (rounding the length up with appendix " by .Net Core"),
+	- DrawContent prints it out.
+- IGrid:
+	- GetButtons - returns Buttons in reverse order to the order of addition,
+		- GetTextBoxes - return TextBoxes in order:
+			first added first
+			the rest in reverse order to the order of addition
+
+Android:
+- IButton:
+	- property Content saves the text, trimming it to the first 8 chars,
+	- DrawContent prints it out,
+	- ButtonPressed prints $"Sweet {content}!".
+- ITextBox:
+	- property Content saves reversed text,
+	- DrawContent prints it out.
+- IGrid:
+	- GetButtons - returns Buttons in order of addition,
+		- GetTextBoxes - returns empty list.
+
+The BuildUI function should (for given platform):
+- create Grid,
+- add three Buttons, set their content to "BigPurpleButton", "SmallButton", "Baton" and add them to the grid,
+- add three TextBoxes, set their content to "", "EmptyTextBox", "xoBtxeT"  and add them to the grid,
+- get Buttons from grid, push them and draw content of each of them,
+- get TextBoxes from grid and draw content of each of them.

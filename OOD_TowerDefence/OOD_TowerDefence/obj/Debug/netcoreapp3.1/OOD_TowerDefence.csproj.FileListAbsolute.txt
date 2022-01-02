@@ -1,0 +1,13 @@
+C:\Users\HP\source\repos\OOD_TowerDefence\OOD_TowerDefence\obj\Debug\netcoreapp3.1\OOD_TowerDefence.csprojAssemblyReference.cache
+C:\Users\HP\source\repos\OOD_TowerDefence\OOD_TowerDefence\obj\Debug\netcoreapp3.1\OOD_TowerDefence.AssemblyInfoInputs.cache
+C:\Users\HP\source\repos\OOD_TowerDefence\OOD_TowerDefence\obj\Debug\netcoreapp3.1\OOD_TowerDefence.AssemblyInfo.cs
+C:\Users\HP\source\repos\OOD_TowerDefence\OOD_TowerDefence\obj\Debug\netcoreapp3.1\OOD_TowerDefence.csproj.CoreCompileInputs.cache
+C:\Users\HP\source\repos\OOD_TowerDefence\OOD_TowerDefence\bin\Debug\netcoreapp3.1\OOD_TowerDefence.exe
+C:\Users\HP\source\repos\OOD_TowerDefence\OOD_TowerDefence\bin\Debug\netcoreapp3.1\OOD_TowerDefence.deps.json
+C:\Users\HP\source\repos\OOD_TowerDefence\OOD_TowerDefence\bin\Debug\netcoreapp3.1\OOD_TowerDefence.runtimeconfig.json
+C:\Users\HP\source\repos\OOD_TowerDefence\OOD_TowerDefence\bin\Debug\netcoreapp3.1\OOD_TowerDefence.runtimeconfig.dev.json
+C:\Users\HP\source\repos\OOD_TowerDefence\OOD_TowerDefence\bin\Debug\netcoreapp3.1\OOD_TowerDefence.dll
+C:\Users\HP\source\repos\OOD_TowerDefence\OOD_TowerDefence\bin\Debug\netcoreapp3.1\OOD_TowerDefence.pdb
+C:\Users\HP\source\repos\OOD_TowerDefence\OOD_TowerDefence\obj\Debug\netcoreapp3.1\OOD_TowerDefence.dll
+C:\Users\HP\source\repos\OOD_TowerDefence\OOD_TowerDefence\obj\Debug\netcoreapp3.1\OOD_TowerDefence.pdb
+C:\Users\HP\source\repos\OOD_TowerDefence\OOD_TowerDefence\obj\Debug\netcoreapp3.1\OOD_TowerDefence.genruntimeconfig.cache
